@@ -7,7 +7,7 @@
         }))
         .then(data => {
             data.forEach(el => {
-               src = `https://drive.google.com/uc?id=${el[1]}&export=download`;
+               let src = `https://drive.google.com/uc?id=${el[1]}&export=download`;
                src = src.replace(/\s/g, '');
                 let card = `<div class='card'>
             <h3>Card</h3>
