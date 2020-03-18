@@ -7,10 +7,11 @@
         }))
         .then(data => {
             data.forEach(el => {
-                el[1] = el[1].replace(/\s/g, '');
+               src = `https://drive.google.com/uc?id=${el[1]}&export=download`;
+               src.replace(/\s/g, '');
                 let card = `<div class='card'>
             <h3>Card</h3>
-                <img src="https://drive.google.com/uc?id=${el[1]}&export=download"></img>
+                <img src="${src}"></img>
                 <span>${el[0]}</span></div>`
                 document.querySelector('.container').innerHTML += card;
             })
