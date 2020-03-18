@@ -8,7 +8,7 @@
         .then(data => {
             data.forEach(el => {
                src = `https://drive.google.com/uc?id=${el[1]}&export=download`;
-               src.replace(/\s/g, '');
+               src = src.replace(/\s/g, '');
                 let card = `<div class='card'>
             <h3>Card</h3>
                 <img src="${src}"></img>
@@ -16,4 +16,3 @@
                 document.querySelector('.container').innerHTML += card;
             })
         })
-    i++;
