@@ -6,6 +6,9 @@
             return el.content.$t.replace(/\w+\:\s*/g, '').split(',')
         }))
         .then(data => {
+            data.sort((a,b)=>{
+                return a[0] > b[0];
+            })
             data.forEach(el => {
                let src = `https://drive.google.com/uc?id=${el[1]}&export=download`;
                src = src.replace(/\s/g, '');
