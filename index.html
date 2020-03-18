@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body{
+        body {
             width: 100vw;
             height: 100vh;
         }
-        .container{
+
+        .container {
             width: 100%;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
         }
 
-        .card{
+        .card {
             width: 300px;
             height: 400px;
             border: 1px solid black;
@@ -24,17 +26,25 @@
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
+            
         }
 
-        img{
+        .box{
+            overflow-y: scroll;
+            width: 100%;
+        }
+
+        img {
             width: 100%;
             max-height: 300px;
         }
     </style>
     <title>Document</title>
 </head>
+
 <body>
     <div class="container"></div>
     <script src="./main.js"></script>
 </body>
+
 </html>

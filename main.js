@@ -2,51 +2,30 @@
         .then(response => response.json())
         .then(({
             feed
-        }) => [...feed.entry].map(el => {
-            return el.content.$t.replace(/\w+\:\s*/g, '').split(',')
+        }) => [...feed.entry].map(({gsx$text,gsx$id,gsx$links}) => {
+            return {text:gsx$text.$t,id:gsx$id.$t,link:gsx$links.$t}
         }))
         .then(data => {
-            data = mergeSort(data);
-            data.forEach(el => {
-               let src = `https://drive.google.com/uc?id=${el[1]}&export=download`;
-               src = src.replace(/\s/g, '');
+            data = data.sort((a,b)=>{
+                if(a.text > b.text){
+                    return 1;
+                } 
+                if(a.text < b.text){
+                    return -1;
+                }
+
+                return 0;
+            });
+            data.forEach(({text,id}) => {
+                console.log(id)
+               let src = `https://drive.google.com/uc?id=${id}&export=download`;
                 let card = `<div class='card'>
             <h3>Card</h3>
                 <img src="${src}"></img>
-                <span>${el[0]}</span></div>`
+                <div class="box">
+                <span>${text}</span>
+                </div>
+                </div>`
                 document.querySelector('.container').innerHTML += card;
             })
         })
-
-        function mergeSort(unsortedArray) {
-            //условие выхода из рекурсии
-            //если переданный массив имеет менее двух элементов - нечего сортировать
-            if (unsortedArray.length < 2) {
-                return unsortedArray;
-            }
-            //находим центр при помощи побитовой операции сдвига на 1 бит вправо
-            //аналог деления на два и округления - только эффективнее
-            const middle = unsortedArray.length >> 1;
-            const left = unsortedArray.slice(0, middle);
-            const right = unsortedArray.slice(middle);
-            //сама сортировка
-            function merge(left, right) {
-                const resultArray = [];
-                let leftIndex = 0;
-                let rightIndex = 0;
-                while (leftIndex < left.length && rightIndex < right.length) {
-                    if (left[leftIndex] < right[rightIndex]) {
-                        resultArray.push(left[leftIndex]);
-                        leftIndex++;
-                    } else {
-                        resultArray.push(right[rightIndex]);
-                        rightIndex++;
-                    }
-                }
-                return resultArray
-                    .concat(left.slice(leftIndex))
-        
-                    .concat(right.slice(rightIndex));
-            }
-            return merge(mergeSort(left), mergeSort(right));
-        }
