@@ -9,7 +9,7 @@
             data.forEach(el => {
                 let card = `<div class='card'>
             <h3>Card</h3>
-                <img src="https://drive.google.com/uc?id=${el[1]}&export=download"></img>
+                <img src="https://drive.google.com/uc?id=${el[1].replace(/\s/g, '')}&export=download"></img>
                 <span>${el[0]}</span></div>`
                 document.querySelector('.container').innerHTML += card;
             })
