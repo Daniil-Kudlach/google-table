@@ -3,7 +3,7 @@
         .then(({
             feed
         }) => [...feed.entry].map(el => {
-            return el.content.$t.replace(/\w+\:\s*/g, '').replace(/\s/g, '').split(',')
+            return el.content.$t.replace(/\w+\:\s*/g, '').split(',')
         }))
         .then(data => {
             data.forEach(el => {
